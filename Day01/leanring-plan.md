@@ -15,6 +15,7 @@ I am interested in automation, deployment, and real-time systems.
 1. Learn Linux, Git, and basic networking
 2. Work with Docker and deploy an application
 3. Learn CI/CD and deploy using GitHub Actions
+4. Successfully complete the 90-day challenge with a portfolio of 15+ LinkedIn projects.
 
 ## Core Skills I Want to Build
 1. Linux & command line usage
