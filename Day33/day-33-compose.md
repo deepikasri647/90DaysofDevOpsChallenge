@@ -1,6 +1,3 @@
-cd ~/2026/day-33
-
-cat << 'EOF' > day-33-compose.md
 # Day 33 Notes: Docker Compose — Multi-Container Application Orchestration
 
 ---
