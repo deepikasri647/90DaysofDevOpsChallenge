@@ -10,8 +10,9 @@
    tools:
      - Docker
      - Kubernetes
-Inline Array Format (JSON-style brackets []):YAMLhobbies: [Running, Coding, Video Editing]
-📜 Task 3 & 4: Nested Objects & Multi-line Strings (| vs >)Block Scalar Styles: Literal (|) vs. Folded (>)IndicatorStyle NameBehaviorBest Use Case|Literal BlockPreserves all newlines and exact formatting verbatim.Multi-line Bash scripts, SSH keys, config blocks.>Folded BlockReplaces newlines with spaces, folding lines into a single string.Long prose descriptions, multi-line documentation strings.🔍 Task 5 & 6: Validation & Spot the DifferenceSpot the Difference ChallengeYAML# Block 1 - CORRECT
+
+🔍 Task 5 & 6: Validation & Spot the DifferenceSpot the Difference ChallengeYAML
+# Block 1 - CORRECT
 name: devops
 tools:
   - docker
@@ -22,4 +23,10 @@ name: devops
 tools:
 - docker
   - kubernetes
-What is wrong with Block 2?In Block 2, - docker and - kubernetes are at inconsistent indentation levels (0 spaces for docker vs 2 spaces for kubernetes). YAML parsers expect sibling list items to share identical indentation.💡 Key Lessons Learned (3 Golden Rules of YAML)Spaces Only — No Tabs: YAML parsers strictly reject tab characters (\t). Always use 2 spaces per indentation level.Colons Need Space: A colon defining a key-value pair MUST be followed by a space (e.g., name: Deepika, NOT name:Deepika).Data Types Matter: true/false are parsed as booleans, whereas "true" or "false" in quotes are parsed as strings.
+  - 
+What is wrong with Block 2?In Block 2, - docker and - kubernetes are at inconsistent indentation levels (0 spaces for docker vs 2 spaces for kubernetes). YAML parsers expect sibling list items to share identical indentation.
+
+💡 Key Lessons Learned (3 Golden Rules of YAML)
+Spaces Only — No Tabs: YAML parsers strictly reject tab characters (\t). Always use 2 spaces per indentation level.
+Colons Need Space: A colon defining a key-value pair MUST be followed by a space (e.g., name: Deepika, NOT name:Deepika).
+Data Types Matter: true/false are parsed as booleans, whereas "true" or "false" in quotes are parsed as strings.
