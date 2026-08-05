@@ -1,8 +1,8 @@
-name: Day 40 - First GitHub Actions Workflow
+name: Day 40 First Workflow
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -13,16 +13,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Say Hello
-        run: echo "Hello from GitHub Actions, Deepika Sri! 🚀"
+        run: echo "Hello from GitHub Actions, Deepika Sri!"
 
-      - name: Print Date and Time
+      - name: Print Date
         run: date
 
-      - name: Print Triggering Branch Name
-        run: echo "Triggered on branch: ${{ github.ref_name }}"
+      - name: Print Branch
+        run: echo "Branch name is main"
 
-      - name: List Repository Files
+      - name: List Files
         run: ls -la
 
-      - name: Print Runner OS Info
+      - name: Print OS
         run: uname -a
