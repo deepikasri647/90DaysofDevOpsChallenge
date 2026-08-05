@@ -26,5 +26,5 @@ jobs:
       - name: List Repository Files
         run: ls -la
 
-      - name: Print Runner Operating System Information
-        run: uname -a && cat /etc/os-release
+      - name: Print OS Info
+        run: uname -a
