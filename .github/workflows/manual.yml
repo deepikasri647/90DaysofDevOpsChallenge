@@ -1,0 +1,21 @@
+name: Manual Dispatch Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target Deployment Environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  manual-deploy:
+    name: Execute Manual Task
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Selected Input
+        run: echo "Executing workflow for target environment: ${{ inputs.environment }}"
