@@ -1,0 +1,25 @@
+name: Day 42 - Self-Hosted Runner Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  run-on-my-machine:
+    name: Execute on Local Self-Hosted Hardware
+    runs-on: [ self-hosted, my-linux-runner ]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Print Hostname and Working Directory
+        run: |
+          echo "Machine Hostname: $(hostname)"
+          echo "Current Directory: $(pwd)"
+
+      - name: Create Test File on Local Machine
+        run: |
+          echo "Created via GitHub Actions on $(date)" > ~/self-hosted-success.txt
+          cat ~/self-hosted-success.txt
