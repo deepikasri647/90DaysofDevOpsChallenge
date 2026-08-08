@@ -1,0 +1,30 @@
+name: Day 43 - Multi-Job Dependencies
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Step
+        run: echo "Building the app..."
+
+  test:
+    name: Run Unit Tests
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Step
+        run: echo "Running tests..."
+
+  deploy:
+    name: Deploy to Production
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Step
+        run: echo "Deploying the app..."
