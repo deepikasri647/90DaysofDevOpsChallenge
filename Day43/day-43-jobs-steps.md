@@ -59,6 +59,7 @@ github.event.head_commit.message: The latest commit message text.
 Because each job runs on an isolated runner virtual machine, memory and local environment variables are destroyed when a job finishes. Writing key-value pairs to $GITHUB_OUTPUT exposes them to downstream jobs via needs.<job_name>.outputs.<key>.
 
 🔀 Task 4 & 5: Conditionals & Error Control (smart-pipeline.yml)
+```yaml
 name: Day 43 - Smart Pipeline
 
 on:
