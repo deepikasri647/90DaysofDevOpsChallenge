@@ -1,0 +1,87 @@
+name: Day 44 - Secrets, Artifacts, Testing & Caching
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: Build, Cache Dependencies & Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Task 6: Dependency Caching
+      - name: Cache Pip Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('Day44/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r Day44/requirements.txt
+
+      # Task 5: Running Real Unit Tests
+      - name: Run Pytest Unit Tests
+        run: |
+          export PYTHONPATH=Day44
+          pytest Day44/test_app.py --junitxml=Day44/test-report.xml
+
+      # Task 1 & 2: Testing Secrets Handling & Masking
+      - name: Inspect Secrets & Masking
+        env:
+          SECRET_MSG: ${{ secrets.MY_SECRET_MESSAGE }}
+          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
+        run: |
+          if [ -n "$SECRET_MSG" ]; then
+            echo "The secret MY_SECRET_MESSAGE is set: true"
+          fi
+          echo "Directly printing secret (GitHub will mask it): ${{ secrets.MY_SECRET_MESSAGE }}"
+          echo "Docker Username configured for: $DOCKER_USER"
+
+      # Task 3: Generate and Upload Artifact
+      - name: Generate Test Summary Artifact
+        run: |
+          echo "Test Execution Status: SUCCESS" > Day44/execution-summary.txt
+          echo "Executed on: $(date)" >> Day44/execution-summary.txt
+
+      - name: Upload Test Report & Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-execution-artifacts
+          path: |
+            Day44/test-report.xml
+            Day44/execution-summary.txt
+          retention-days: 5
+
+  process-artifact:
+    name: Download & Process Artifact in Downstream Job
+    needs: [ build-and-test ]
+    runs-on: ubuntu-latest
+
+    steps:
+      # Task 4: Download Artifacts Between Jobs
+      - name: Download Test Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: test-execution-artifacts
+          path: downloaded-artifacts
+
+      - name: Inspect Downloaded Artifact Contents
+        run: |
+          echo "=== Content of execution-summary.txt ==="
+          cat downloaded-artifacts/execution-summary.txt
+          echo "=== Content of test-report.xml ==="
+          cat downloaded-artifacts/test-report.xml
